@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de Conversión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Resultado</h1>
+        
+        <div class="result-card">
+            <p style="color: var(--text-muted); margin-bottom: 0.5rem;">{{ amount }} {{ from_curr }} equivale a:</p>
+            <div class="result-main">{{ "{:,.2f}".format(result) }} {{ to_curr }}</div>
+            <div class="result-rate">1 {{ from_curr }} = {{ rate }} {{ to_curr }}</div>
+            
+            <div class="footer-info">
+                Actualizado el: {{ date }} (Banco Central Europeo)
+            </div>
+        </div>
+
+        {% if chart_url %}
+        <div class="chart-container">
+            <h3 style="text-align: center; margin-bottom: 1rem; color: var(--text-muted);">Historial de 30 días</h3>
+            <img src="data:image/png;base64,{{ chart_url }}" alt="Gráfico de evolución">
+        </div>
+        {% endif %}
+
+        <div style="text-align: center;">
+            <a href="/" class="btn-back">← Volver al conversor</a>
+        </div>
+    </div>
+</body>
+</html>

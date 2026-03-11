@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Conversor de Monedas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container" style="text-align: center;">
+        <div class="error-title">Oops!</div>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">
+            No pudimos conectar con el servicio de tasas de cambio.<br>
+            Por favor, verifica tu conexión a internet e inténtalo de nuevo.
+        </p>
+        <a href="/" class="convert-btn" style="text-decoration: none; display: inline-block;">Reintentar</a>
+    </div>
+</body>
+</html>

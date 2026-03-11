@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Monedas Premium</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Conversor de Monedas</h1>
+        
+        <form action="/convert" method="POST" class="converter-form">
+            <div class="form-group">
+                <label for="from_curr">De:</label>
+                <select name="from_curr" id="from_curr" class="input-style" required>
+                    {% for code, name in currencies.items() %}
+                        <option value="{{ code }}" {% if code == 'EUR' %}selected{% endif %}>{{ code }} - {{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="button" class="swap-btn" id="swapBtn" title="Intercambiar monedas">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4M7 4L3 8M7 4L11 8M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+            </button>
+
+            <div class="form-group">
+                <label for="to_curr">A:</label>
+                <select name="to_curr" id="to_curr" class="input-style" required>
+                    {% for code, name in currencies.items() %}
+                        <option value="{{ code }}" {% if code == 'USD' %}selected{% endif %}>{{ code }} - {{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group amount-group">
+                <label for="amount">Cantidad:</label>
+                <input type="number" name="amount" id="amount" class="input-style" value="1.00" step="0.01" min="0.01" required>
+            </div>
+
+            <button type="submit" class="convert-btn">Convertir Ahora</button>
+        </form>
+
+        <div class="footer-info">
+            <p>Datos en tiempo real proporcionados por Frankfurter API.</p>
+            <p>Fuentes: Banco Central Europeo.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('swapBtn').addEventListener('click', function() {
+            const fromSelect = document.getElementById('from_curr');
+            const toSelect = document.getElementById('to_curr');
+            const temp = fromSelect.value;
+            fromSelect.value = toSelect.value;
+            toSelect.value = temp;
+        });
+    </script>
+</body>
+</html>
